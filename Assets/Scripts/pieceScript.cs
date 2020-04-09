@@ -10,6 +10,7 @@ public class pieceScript : MonoBehaviour
     bool stopMoving;
     public bool newPiece;
     Rigidbody rb;
+    
 
     private void Awake()
     {
@@ -35,8 +36,14 @@ public class pieceScript : MonoBehaviour
         {
             stopMoving = true;
             rb.useGravity = true;
-            GameManager.sharedInstance.currentGameState = GameState.startGame;
-           
+            if (GameManager.sharedInstance.tower.Count >= 5)
+            {
+
+                GameManager.sharedInstance.StartGame();
+            }
+            else GameManager.sharedInstance.InicialGame();
+
+
         }
 
         if (!stopMoving)
