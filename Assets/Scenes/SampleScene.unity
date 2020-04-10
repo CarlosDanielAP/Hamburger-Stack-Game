@@ -423,10 +423,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e79d8496b810f49ae44ed2de9d03c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limitLeft: -2
-  limitRight: 2
-  speed: 0.25
-  spacingPiecesFactor: 0.6
+  limitLeft: 0
+  limitRight: 0
+  speed: 1
+  spacingPiecesFactor: 0.5
   cameraMoveBlock: 2
   currentGameState: 2
   myPieces:
@@ -434,6 +434,7 @@ MonoBehaviour:
   tower:
   - {fileID: 488639794}
   moveCamera: 0
+  blockColl: 0
 --- !u!4 &1494039571
 Transform:
   m_ObjectHideFlags: 0

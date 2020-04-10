@@ -23,11 +23,16 @@ public class GameManager : MonoBehaviour
     public List<pieceScript> myPieces= new List<pieceScript>();
     public List<pieceScript> tower= new List<pieceScript>();
     public bool moveCamera;
+    public bool blockColl;
+    bool left;
+    float startDistance;
     // Start is called before the first frame update
     void Start()
-    {
+    {  
         InicialGame();
         moveCamera = false;
+        blockColl = true;
+       
        
     }
     private void Awake()
@@ -40,23 +45,51 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
-        if (currentGameState == GameState.startGame && Input.GetMouseButtonDown(0))
+       
+    
+        if (blockColl)
         {
-            CreateNewCube();
-        }
-        if(currentGameState == GameState.inicialGame && Input.GetMouseButtonDown(0))
-        {
-            CreateNewCube();
-           
-        }
 
+            if (currentGameState == GameState.startGame && Input.GetMouseButtonDown(0))
+            {
+
+                CreateNewCube();
+
+                blockColl = false;
+               
+            }
+            if (currentGameState == GameState.inicialGame && Input.GetMouseButtonDown(0))
+            {
+
+               
+                CreateNewCube();
+                blockColl = false;
+                Invoke("checkFirstCubes",0.5f);
+
+                
+
+            }
+            
+        }
+       
 
 
     }
     public void StartGame()
     {
         SetGameState(GameState.startGame);
+    }
+    public void checkFirstCubes()
+    {
+        if (tower.Count > 2)
+        {
+            blockColl = false;
+        }
+        else
+        {
+            blockColl = true;
+
+        }
     }
 
     public void CreateNewCube (){
@@ -71,20 +104,42 @@ public class GameManager : MonoBehaviour
 
     private void SetGameState(GameState newGameState)
     {
+        
         if (newGameState == GameState.newCube)
         {
+            
+
             pieceScript newPiece;
             newPiece = Instantiate(myPieces[0]);
             pieceScript lastPiece = tower[tower.Count-1];
             
             if (moveCamera)
             {
-                newPiece.transform.position = new Vector3(limitLeft, lastPiece.transform.position.y + spacingPiecesFactor, lastPiece.transform.position.z);
+                if (left)
+                {
+                    newPiece.transform.position = new Vector3(limitLeft, lastPiece.transform.position.y + spacingPiecesFactor, lastPiece.transform.position.z);
+                    left = false;
+                }
+                else
+                {
+                    newPiece.transform.position = new Vector3(limitRight, lastPiece.transform.position.y + spacingPiecesFactor, lastPiece.transform.position.z);
+                    left = true;
+                }
 
             }
             else
             {
-                newPiece.transform.position = new Vector3(limitLeft, tower[0].transform.position.y+ 5, lastPiece.transform.position.z);
+                startDistance += 0.5f;
+                if (left)
+                {
+                    newPiece.transform.position = new Vector3(limitLeft, tower[0].transform.position.y + (4+startDistance), lastPiece.transform.position.z);
+                    left = false;
+                }
+                else
+                {
+                    newPiece.transform.position = new Vector3(limitRight, tower[0].transform.position.y + (4+startDistance), lastPiece.transform.position.z);
+                    left = true;
+                }
             }
             lastPiece.GetComponent<pieceScript>().newPiece = true;
             tower.Add(newPiece);

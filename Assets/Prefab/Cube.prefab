@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 602001151}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,9 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516c34d6dd3469d4fbf624f138fe2712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limitLeft: -2
-  limitRight: 2
-  speed: 1
+  newPiece: 0
 --- !u!54 &602001151
 Rigidbody:
   m_ObjectHideFlags: 0

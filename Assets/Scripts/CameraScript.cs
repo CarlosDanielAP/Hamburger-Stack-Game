@@ -17,8 +17,8 @@ public class CameraScript : MonoBehaviour
     {
         if (GameManager.sharedInstance.tower.Count > 1)
         {
-
-            transform.position = new Vector3(transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position,new Vector3( transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z), Time.deltaTime * 1f);
+            //transform.position = new Vector3(transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z);
 
         }
     }
