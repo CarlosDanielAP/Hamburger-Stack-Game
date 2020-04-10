@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public enum GameState
 {
     menu,
@@ -12,7 +13,8 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-
+    public float levelDistance = 0.1f;
+    public bool gameOver;
     public float limitLeft, limitRight;
     public float speed = 3.0f;
     public float spacingPiecesFactor= 0.5f;
@@ -26,12 +28,15 @@ public class GameManager : MonoBehaviour
     public bool blockColl;
     bool left;
     float startDistance;
+    public GameObject deathZone;
     // Start is called before the first frame update
     void Start()
-    {  
+    {
+        gameOver = false;
         InicialGame();
         moveCamera = false;
         blockColl = true;
+        
        
        
     }
@@ -45,32 +50,36 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-    
-        if (blockColl)
+
+        if (!gameOver)
         {
-
-            if (currentGameState == GameState.startGame && Input.GetMouseButtonDown(0))
+            if (blockColl)
             {
 
-                CreateNewCube();
+                if (currentGameState == GameState.startGame && Input.GetMouseButtonDown(0))
+                {
 
-                blockColl = false;
-               
+                    CreateNewCube();
+
+                    blockColl = false;
+
+                }
+                if (currentGameState == GameState.inicialGame && Input.GetMouseButtonDown(0))
+                {
+
+
+                    CreateNewCube();
+                    blockColl = false;
+                    Invoke("checkFirstCubes", 0.5f);
+
+
+
+                }
+
             }
-            if (currentGameState == GameState.inicialGame && Input.GetMouseButtonDown(0))
-            {
-
-               
-                CreateNewCube();
-                blockColl = false;
-                Invoke("checkFirstCubes",0.5f);
-
-                
-
-            }
-            
         }
+
+       
        
 
 
@@ -117,12 +126,12 @@ public class GameManager : MonoBehaviour
             {
                 if (left)
                 {
-                    newPiece.transform.position = new Vector3(limitLeft, lastPiece.transform.position.y + spacingPiecesFactor, lastPiece.transform.position.z);
+                    newPiece.transform.position = new Vector3(limitLeft, lastPiece.transform.position.y + spacingPiecesFactor, tower[0].transform.position.z);
                     left = false;
                 }
                 else
                 {
-                    newPiece.transform.position = new Vector3(limitRight, lastPiece.transform.position.y + spacingPiecesFactor, lastPiece.transform.position.z);
+                    newPiece.transform.position = new Vector3(limitRight, lastPiece.transform.position.y + spacingPiecesFactor, tower[0].transform.position.z);
                     left = true;
                 }
 
@@ -132,16 +141,17 @@ public class GameManager : MonoBehaviour
                 startDistance += 0.5f;
                 if (left)
                 {
-                    newPiece.transform.position = new Vector3(limitLeft, tower[0].transform.position.y + (4+startDistance), lastPiece.transform.position.z);
+                    newPiece.transform.position = new Vector3(limitLeft, tower[0].transform.position.y + (levelDistance+startDistance), tower[0].transform.position.z);
                     left = false;
                 }
                 else
                 {
-                    newPiece.transform.position = new Vector3(limitRight, tower[0].transform.position.y + (4+startDistance), lastPiece.transform.position.z);
+                    newPiece.transform.position = new Vector3(limitRight, tower[0].transform.position.y + (levelDistance+startDistance), tower[0].transform.position.z);
                     left = true;
                 }
             }
             lastPiece.GetComponent<pieceScript>().newPiece = true;
+            deathZone.gameObject.transform.position = new Vector2(deathZone.gameObject.transform.position.x, deathZone.gameObject.transform.position.y +0.5f);
             tower.Add(newPiece);
 
             //TODO colocar la logica del menu

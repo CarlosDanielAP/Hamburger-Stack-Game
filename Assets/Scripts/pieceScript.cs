@@ -40,7 +40,7 @@ public class pieceScript : MonoBehaviour
             stopMoving = true;
             rb.useGravity = true;
            
-            if (GameManager.sharedInstance.tower.Count >= 5)
+            if (GameManager.sharedInstance.tower.Count >= 10)
             {
 
                 GameManager.sharedInstance.StartGame();

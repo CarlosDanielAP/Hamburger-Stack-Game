@@ -15,10 +15,24 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.sharedInstance.tower.Count > 1)
+        if (!GameManager.sharedInstance.gameOver)
         {
-            transform.position = Vector3.Lerp(transform.position,new Vector3( transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z), Time.deltaTime * 1f);
-            //transform.position = new Vector3(transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z);
+           // if (GameManager.sharedInstance.tower.Count > 1)
+           if(GameManager.sharedInstance.currentGameState==GameState.inicialGame)
+            {
+                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, GameManager.sharedInstance.tower[0].transform.position.y + 3, transform.position.z), Time.deltaTime * 1f);
+                 //transform.position = new Vector3(transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z);
+
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z), Time.deltaTime * 1f);
+
+            }
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 2].transform.position.y, transform.position.z), Time.deltaTime * 1f);
 
         }
     }
