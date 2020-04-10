@@ -926,7 +926,7 @@ MonoBehaviour:
   levelDistance: 1.5
   gameOver: 0
   limitLeft: -2
-  limitRight: -2
+  limitRight: 2
   speed: 1
   spacingPiecesFactor: 0.5
   cameraMoveBlock: 2
