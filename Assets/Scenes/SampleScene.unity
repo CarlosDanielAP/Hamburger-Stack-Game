@@ -1011,6 +1011,7 @@ GameObject:
   - component: {fileID: 1474004804}
   - component: {fileID: 1474004803}
   - component: {fileID: 1474004802}
+  - component: {fileID: 1474004806}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -1092,6 +1093,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1474004806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474004801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9261be66b79784428f0df50153986f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1494039569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1153,7 @@ MonoBehaviour:
   blockColl: 0
   deathZone: {fileID: 1043328824}
   TouchScreen: 0
+  tapaOnGame: 0
 --- !u!4 &1494039571
 Transform:
   m_ObjectHideFlags: 0
