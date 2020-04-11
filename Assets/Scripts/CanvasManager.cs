@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class CanvasManager : MonoBehaviour
 {
     public Button restartButton;
+    public Button hamburgerButton;
     public Text hamburgerSize;
     // Start is called before the first frame update
     
@@ -28,5 +29,19 @@ public class CanvasManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void CreateHamburger()
+    {
+        Debug.Log("hamburgesa");
+        GameManager.sharedInstance.PutTapa();
+
+
+    }
+
+    public void TouchScreen()
+    {
+        Debug.Log("touchScreen");
+        GameManager.sharedInstance.TouchScreen = true;
     }
 }

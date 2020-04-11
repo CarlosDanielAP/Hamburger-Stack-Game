@@ -9,10 +9,12 @@ public enum GameState
     newCube,
     startGame,
     inicialGame,
+    putTapa
 }
 
 public class GameManager : MonoBehaviour
 {
+    public int hamburguerScore;
     public float levelDistance = 0.1f;
     public bool gameOver;
     public float limitLeft, limitRight;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     bool left;
     float startDistance;
     public GameObject deathZone;
+    public  bool TouchScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
         InicialGame();
         moveCamera = false;
         blockColl = true;
+        TouchScreen = false;
         
        
        
@@ -53,21 +57,22 @@ public class GameManager : MonoBehaviour
 
         if (!gameOver)
         {
-            if (blockColl)
+            if (blockColl&&currentGameState!=GameState.putTapa)
             {
 
-                if (currentGameState == GameState.startGame && Input.GetMouseButtonDown(0))
+                if (currentGameState == GameState.startGame && TouchScreen)
                 {
+                    TouchScreen = false;
 
                     CreateNewCube();
 
                     blockColl = false;
 
                 }
-                if (currentGameState == GameState.inicialGame && Input.GetMouseButtonDown(0))
+                if (currentGameState == GameState.inicialGame && TouchScreen)
                 {
 
-
+                    TouchScreen = false;
                     CreateNewCube();
                     blockColl = false;
                     Invoke("checkFirstCubes", 0.5f);
@@ -111,10 +116,19 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.inicialGame);
     }
 
+    public void PutTapa()
+    {
+        SetGameState(GameState.putTapa);
+    }
+
     private void SetGameState(GameState newGameState)
     {
-        
-        if (newGameState == GameState.newCube)
+          if (newGameState == GameState.putTapa)
+        {
+           
+            //cambiar estado poner tapa si la puso hamburgesa generada y crear una nueva
+        }
+        else if (newGameState == GameState.newCube)
         {
             
 
@@ -165,6 +179,8 @@ public class GameManager : MonoBehaviour
         {
             moveCamera = true;
         }
+
+      
         this.currentGameState = newGameState;
     }
     }
