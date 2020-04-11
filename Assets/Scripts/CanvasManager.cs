@@ -33,15 +33,19 @@ public class CanvasManager : MonoBehaviour
 
     public void CreateHamburger()
     {
-        Debug.Log("hamburgesa");
-        GameManager.sharedInstance.PutTapa();
-
+        if (GameManager.sharedInstance.tower.Count > 2)
+        {
+            Debug.Log("hamburgesa");
+            GameManager.sharedInstance.PutTapa();
+        }
 
     }
 
     public void TouchScreen()
     {
-        Debug.Log("touchScreen");
-        GameManager.sharedInstance.TouchScreen = true;
+      
+            Debug.Log("touchScreen");
+            GameManager.sharedInstance.TouchScreen = true;
+        
     }
 }

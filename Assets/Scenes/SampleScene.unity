@@ -151,11 +151,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1536065397}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30.7}
+  m_AnchoredPosition: {x: 0, y: -30.699997}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &34831883
@@ -229,7 +229,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1536065397}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -278,7 +278,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 136779568}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1494039572}
+        m_MethodName: TouchScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &136779568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,18 +326,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136779565}
   m_CullTransparentMesh: 0
---- !u!114 &488639794 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5497176524103697047, guid: 948b3ba773224d741bd27739b32a34fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 988509203}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 516c34d6dd3469d4fbf624f138fe2712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,6 +514,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c72d2b3d811d54a82ee3c025660006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &984450217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5497176524103697044, guid: 948b3ba773224d741bd27739b32a34fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 988509203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &988509203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -618,7 +623,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1536065397}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -754,7 +759,7 @@ RectTransform:
   m_Children:
   - {fileID: 1335259437}
   m_Father: {fileID: 1536065397}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1125,14 +1130,16 @@ MonoBehaviour:
   speed: 1
   spacingPiecesFactor: 0.5
   cameraMoveBlock: 2
-  currentGameState: 2
+  currentGameState: 4
   myPieces:
-  - {fileID: 5497176524103697047, guid: 948b3ba773224d741bd27739b32a34fb, type: 3}
+  - {fileID: 5497176524103697044, guid: 948b3ba773224d741bd27739b32a34fb, type: 3}
+  tapa: {fileID: 5497176524103697044, guid: ae68a397affca774ba54559cb51a6d27, type: 3}
   tower:
-  - {fileID: 488639794}
+  - {fileID: 984450217}
   moveCamera: 0
   blockColl: 0
   deathZone: {fileID: 1043328824}
+  TouchScreen: 0
 --- !u!4 &1494039571
 Transform:
   m_ObjectHideFlags: 0
@@ -1252,10 +1259,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 136779566}
   - {fileID: 1174452737}
   - {fileID: 997335490}
   - {fileID: 34831882}
-  - {fileID: 136779566}
   - {fileID: 1571931706}
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -1300,7 +1307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 30, y: 61.7}
+  m_AnchoredPosition: {x: 30, y: 61.699997}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1571931707

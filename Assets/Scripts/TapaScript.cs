@@ -22,19 +22,14 @@ public class TapaScript : MonoBehaviour
     void Start()
     {
         
-        newPiece = false;
-        goingRight = true;
-        stopMoving = false;
-        //si la torre tiene mas de una pieza le ponemos su velocidad
-        if (GameManager.sharedInstance.tower.Count > 1)
-            speed = GameManager.sharedInstance.speed;
-        else
-            speed = 0;
+    
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        /*
         if (newPiece == true) 
         {
             stopMoving = true;
@@ -71,7 +66,7 @@ public class TapaScript : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(GameManager.sharedInstance.limitLeft - 1, transform.position.y, transform.position.z), Time.deltaTime * speed);
 
             }
-        }
+        }*/     
     }
     private void OnCollisionEnter(Collision collision)
     {

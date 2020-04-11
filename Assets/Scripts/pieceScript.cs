@@ -39,14 +39,15 @@ public class pieceScript : MonoBehaviour
         {
             stopMoving = true;
             rb.useGravity = true;
-           
-            if (GameManager.sharedInstance.tower.Count >= 10)
+            if (!GameManager.sharedInstance.tapaOnGame)
             {
+                if (GameManager.sharedInstance.tower.Count >= 10)
+                {
 
-                GameManager.sharedInstance.StartGame();
+                    GameManager.sharedInstance.StartGame();
+                }
+                else GameManager.sharedInstance.InicialGame();
             }
-            else GameManager.sharedInstance.InicialGame();
-
 
         }
 
@@ -80,6 +81,7 @@ public class pieceScript : MonoBehaviour
         {
             Debug.Log("chocado");
             GameManager.sharedInstance.blockColl = true;
+            this.enabled = false;
             
         }
     }

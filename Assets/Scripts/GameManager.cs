@@ -24,14 +24,16 @@ public class GameManager : MonoBehaviour
     public int cameraMoveBlock;
     public GameState currentGameState = GameState.inicialGame;
     public static GameManager sharedInstance;
-    public List<pieceScript> myPieces= new List<pieceScript>();
-    public List<pieceScript> tower= new List<pieceScript>();
+    public List<GameObject> myPieces= new List<GameObject>();
+    public GameObject tapa;
+    public List<GameObject> tower= new List<GameObject>();
     public bool moveCamera;
     public bool blockColl;
     bool left;
     float startDistance;
     public GameObject deathZone;
     public  bool TouchScreen;
+    public bool tapaOnGame;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
         moveCamera = false;
         blockColl = true;
         TouchScreen = false;
+        tapaOnGame = false;
         
        
        
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
         {
             if (blockColl&&currentGameState!=GameState.putTapa)
             {
-
+               
                 if (currentGameState == GameState.startGame && TouchScreen)
                 {
                     TouchScreen = false;
@@ -124,17 +127,27 @@ public class GameManager : MonoBehaviour
     private void SetGameState(GameState newGameState)
     {
           if (newGameState == GameState.putTapa)
-        {
-           
-            //cambiar estado poner tapa si la puso hamburgesa generada y crear una nueva
+        { //save the floating pice position
+            tapaOnGame = true;
+            Vector3 changePose = tower[tower.Count - 1].gameObject.transform.position;
+            //erease the floating piece
+            Destroy(tower[tower.Count - 1].gameObject);
+            tower.RemoveAt(tower.Count - 1);
+            //create the hamburger tapa
+            GameObject newTapa;
+            newTapa = Instantiate(tapa).gameObject;
+            //revover the position of the floating piece
+            newTapa.transform.position = changePose;
+            //add the tapa to the list;
+            tower.Add(newTapa.gameObject);
         }
         else if (newGameState == GameState.newCube)
         {
-            
+           
 
-            pieceScript newPiece;
-            newPiece = Instantiate(myPieces[0]);
-            pieceScript lastPiece = tower[tower.Count-1];
+            GameObject newPiece;
+            newPiece = Instantiate(myPieces[0]).gameObject;
+            GameObject lastPiece = tower[tower.Count-1];
             
             if (moveCamera)
             {
