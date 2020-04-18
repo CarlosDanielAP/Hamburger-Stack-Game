@@ -8,7 +8,7 @@ public class TapaScript : MonoBehaviour
     float speed;
     bool goingRight;
     bool stopMoving;
-    public bool newPiece;
+    
     Rigidbody rb;
 
     
@@ -21,29 +21,23 @@ public class TapaScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    
+        stopMoving = false;
+        speed = GameManager.sharedInstance.speed;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        /*
-        if (newPiece == true) 
+
+        if (GameManager.sharedInstance.sueltaTapa)
         {
             stopMoving = true;
-            rb.useGravity = true;
-           
-            if (GameManager.sharedInstance.tower.Count >= 10)
-            {
-
-                GameManager.sharedInstance.StartGame();
-            }
-            else GameManager.sharedInstance.InicialGame();
-
-
+            rb.useGravity = true; ;
         }
+
+
+      
 
         if (!stopMoving)
         {
@@ -66,7 +60,8 @@ public class TapaScript : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(GameManager.sharedInstance.limitLeft - 1, transform.position.y, transform.position.z), Time.deltaTime * speed);
 
             }
-        }*/     
+        }
+         
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -74,7 +69,7 @@ public class TapaScript : MonoBehaviour
         if (collision.gameObject == GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count-2].gameObject)
         {
             Debug.Log("chocado");
-            GameManager.sharedInstance.blockColl = true;
+           
             
         }
     }

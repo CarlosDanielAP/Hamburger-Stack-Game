@@ -34,9 +34,12 @@ public class GameManager : MonoBehaviour
     public GameObject deathZone;
     public  bool TouchScreen;
     public bool tapaOnGame;
+    public bool sueltaTapa;
+   
     // Start is called before the first frame update
     void Start()
     {
+        sueltaTapa = false;
         gameOver = false;
         InicialGame();
         moveCamera = false;
@@ -60,9 +63,9 @@ public class GameManager : MonoBehaviour
 
         if (!gameOver)
         {
-            if (blockColl&&currentGameState!=GameState.putTapa)
+            if (blockColl && currentGameState != GameState.putTapa)
             {
-               
+
                 if (currentGameState == GameState.startGame && TouchScreen)
                 {
                     TouchScreen = false;
@@ -84,6 +87,12 @@ public class GameManager : MonoBehaviour
 
                 }
 
+            }
+
+            else if(currentGameState == GameState.putTapa&&TouchScreen) {
+                TouchScreen = false;
+                sueltaTapa = true;
+                Debug.Log("sueltatapa");
             }
         }
 
