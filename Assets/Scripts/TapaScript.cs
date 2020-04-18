@@ -32,6 +32,7 @@ public class TapaScript : MonoBehaviour
 
         if (GameManager.sharedInstance.sueltaTapa)
         {
+            GameManager.sharedInstance.sueltaTapa = false;
             stopMoving = true;
             rb.useGravity = true; ;
         }
@@ -68,7 +69,10 @@ public class TapaScript : MonoBehaviour
        
         if (collision.gameObject == GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count-2].gameObject)
         {
-            Debug.Log("chocado");
+            Debug.Log("next Level");
+           // GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 2].GetComponent<pieceScript>().enabled = false;
+            //this.enabled = false;
+            GameManager.sharedInstance.NextLevel();
            
             
         }

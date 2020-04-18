@@ -9,7 +9,9 @@ public enum GameState
     newCube,
     startGame,
     inicialGame,
-    putTapa
+    putTapa,
+    nextLevel,
+    createLevel
 }
 
 public class GameManager : MonoBehaviour
@@ -22,10 +24,11 @@ public class GameManager : MonoBehaviour
     public float spacingPiecesFactor= 0.5f;
     //every time you stack this blocks it will move
     public int cameraMoveBlock;
-    public GameState currentGameState = GameState.inicialGame;
+    public GameState currentGameState = GameState.createLevel;
     public static GameManager sharedInstance;
     public List<GameObject> myPieces= new List<GameObject>();
     public GameObject tapa;
+    public GameObject hamBase;
     public List<GameObject> tower= new List<GameObject>();
     public bool moveCamera;
     public bool blockColl;
@@ -35,20 +38,31 @@ public class GameManager : MonoBehaviour
     public  bool TouchScreen;
     public bool tapaOnGame;
     public bool sueltaTapa;
+    bool levelReady;
+    bool nextLevelReady;
+    public Vector3 basePos;
+    Vector3 killZonePos;
    
     // Start is called before the first frame update
     void Start()
     {
+        
+        basePos = Vector3.zero;
+        levelReady = false;
+        nextLevelReady = false;
+        CreateLevel();
         sueltaTapa = false;
         gameOver = false;
-        InicialGame();
+      //InicialGame();
         moveCamera = false;
         blockColl = true;
         TouchScreen = false;
         tapaOnGame = false;
-        
-       
-       
+        //for the restartlevel we save the killzonepos and then reset it adding x value;
+        killZonePos = deathZone.transform.position;
+
+
+
     }
     private void Awake()
     {
@@ -60,7 +74,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (levelReady)
+        {
+            levelReady = false;
+            InicialGame();
+        }
+        if (nextLevelReady)
+        {
+            nextLevelReady = false;
 
+            Invoke("CreateLevel", 5f);
+           // CreateLevel();
+
+        }
         if (!gameOver)
         {
             if (blockColl && currentGameState != GameState.putTapa)
@@ -105,6 +131,11 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.startGame);
     }
+
+    public void CreateLevel()
+    {
+        SetGameState(GameState.createLevel);
+    }
     public void checkFirstCubes()
     {
         if (tower.Count > 2)
@@ -133,6 +164,10 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.putTapa);
     }
 
+    public void NextLevel()
+    {
+        SetGameState(GameState.nextLevel);
+    }
     private void SetGameState(GameState newGameState)
     {
           if (newGameState == GameState.putTapa)
@@ -189,8 +224,7 @@ public class GameManager : MonoBehaviour
             lastPiece.GetComponent<pieceScript>().newPiece = true;
             deathZone.gameObject.transform.position = new Vector2(deathZone.gameObject.transform.position.x, deathZone.gameObject.transform.position.y +0.5f);
             tower.Add(newPiece);
-
-            //TODO colocar la logica del menu
+            
         }
         else if (newGameState == GameState.inicialGame)
         {
@@ -200,6 +234,31 @@ public class GameManager : MonoBehaviour
         else if (newGameState == GameState.startGame)
         {
             moveCamera = true;
+        }
+
+        else if (newGameState == GameState.nextLevel)
+        {
+            //wait some seconds to see if the hamburger doesnt fall
+            deathZone.transform.position = killZonePos;
+            
+            basePos.x +=3;
+            nextLevelReady = true;
+           
+
+        }
+        else if (newGameState == GameState.createLevel) {
+            //put the base of the hamburguer;
+            tower = new List<GameObject>();
+            GameObject newBase;
+            newBase = Instantiate(hamBase).gameObject;
+            newBase.transform.position = basePos;
+            basePos = newBase.transform.position;
+           
+            tower.Add(newBase);
+            levelReady = true;
+            
+
+
         }
 
       

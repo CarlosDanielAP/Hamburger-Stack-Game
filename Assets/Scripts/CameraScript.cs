@@ -9,7 +9,7 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
 
-        transform.position = new Vector3(transform.position.x,GameManager.sharedInstance.cameraMoveBlock, transform.position.z);
+        transform.position = new Vector3(GameManager.sharedInstance.basePos.x,GameManager.sharedInstance.cameraMoveBlock, transform.position.z);
     }
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class CameraScript : MonoBehaviour
         
         if (GameManager.sharedInstance.gameOver)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 2].transform.position.y, transform.position.z), Time.deltaTime * 1f);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(GameManager.sharedInstance.basePos.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 2].transform.position.y, transform.position.z), Time.deltaTime * 1f);
 
         }
         else
@@ -26,13 +26,13 @@ public class CameraScript : MonoBehaviour
 
             if (GameManager.sharedInstance.currentGameState == GameState.inicialGame)
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, GameManager.sharedInstance.tower[0].transform.position.y + 3, transform.position.z), Time.deltaTime * 1f);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(GameManager.sharedInstance.basePos.x, GameManager.sharedInstance.tower[0].transform.position.y + 3, transform.position.z), Time.deltaTime * 1f);
 
 
             }
             else if(GameManager.sharedInstance.currentGameState != GameState.putTapa)
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z), Time.deltaTime * 1f);
+                transform.position = Vector3.Lerp(transform.position, new Vector3(GameManager.sharedInstance.basePos.x, GameManager.sharedInstance.tower[GameManager.sharedInstance.tower.Count - 1].transform.position.y - 3, transform.position.z), Time.deltaTime * 1f);
 
             }
         }   
