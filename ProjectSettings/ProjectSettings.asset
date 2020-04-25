@@ -743,6 +743,8 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Build: 1
+    Collab: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -756,10 +758,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: c42a3a68-f36c-4d43-8ff0-1caf48f65cbb
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: anvorgesa tower
+  organizationId: carlos-ahuactzin
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

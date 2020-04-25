@@ -82,8 +82,9 @@ public class GameManager : MonoBehaviour
         if (nextLevelReady)
         {
             nextLevelReady = false;
-
-            Invoke("CreateLevel", 5f);
+           
+                Invoke("CreateLevel", 5f);
+            
            // CreateLevel();
 
         }
@@ -247,15 +248,18 @@ public class GameManager : MonoBehaviour
 
         }
         else if (newGameState == GameState.createLevel) {
-            //put the base of the hamburguer;
-            tower = new List<GameObject>();
-            GameObject newBase;
-            newBase = Instantiate(hamBase).gameObject;
-            newBase.transform.position = basePos;
-            basePos = newBase.transform.position;
-           
-            tower.Add(newBase);
-            levelReady = true;
+            if (!gameOver)
+            {
+                //put the base of the hamburguer;
+                tower = new List<GameObject>();
+                GameObject newBase;
+                newBase = Instantiate(hamBase).gameObject;
+                newBase.transform.position = basePos;
+                basePos = newBase.transform.position;
+
+                tower.Add(newBase);
+                levelReady = true;
+            }
             
 
 
